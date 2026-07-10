@@ -1,0 +1,109 @@
+/* ==========================================================================
+   LuxLiving — Where Luxury Meets Comfort
+   Global stylesheet (ported from the Claude Design prototype)
+   ========================================================================== */
+
+body { margin: 0; background: #F5F1EB; }
+::selection { background: #DFC9A8; color: #1C1C1E; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D8D2C8; border-radius: 10px; }
+
+/* ---- keyframes ---- */
+@keyframes glowPulse { 0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; } }
+@keyframes waPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); } 50% { box-shadow: 0 4px 32px rgba(37,211,102,0.55); } }
+@keyframes successPulse { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes barFill3s { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pageEnter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes craftKb { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+@keyframes barFill6s { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes menuIn { from { transform: translateX(-48px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---- product / brand cards ---- */
+.lux-card:hover .lux-card-img1 { opacity: 0; transform: scale(1.06); }
+.lux-card:hover .lux-card-img2 { opacity: 1; transform: scale(1); }
+.lux-card:hover .lux-card-arrow { opacity: 1; transform: translateY(0); }
+.lux-card:hover .lux-card-title { color: #C4985A; }
+.lux-card:has(.lux-card-img2[src=""]) .lux-card-img2 { display: none; }
+/* never blank the card: if the hover image is missing or still loading, keep the primary image visible */
+.lux-card.img2-loading:hover .lux-card-img1,
+.lux-card:has(.lux-card-img2[src=""]):hover .lux-card-img1 { opacity: 1; }
+.brand-card { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+.brand-card:hover { transform: translateY(-6px); }
+.brand-card img { transition: transform 1s cubic-bezier(0.22,1,0.36,1); }
+.brand-card:hover img { transform: scale(1.07); }
+.brand-card .brand-card-name { transition: color 0.4s ease; }
+.brand-card:hover .brand-card-name { color: #DFC9A8; }
+.brand-list-card:hover img { transform: scale(1.05); }
+
+/* ---- contact / map ----
+   Parchment-toned map: warm sepia duotone that matches the site's cream & gold
+   palette at rest, revealing true colours on hover. */
+.map-premium iframe { filter: sepia(0.45) grayscale(0.5) saturate(1.35) brightness(1.04) contrast(0.96) hue-rotate(-8deg); transition: filter 0.8s cubic-bezier(0.22,1,0.36,1); }
+.map-premium:hover iframe { filter: none; }
+.map-premium::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(196,152,90,0.14) 0%, rgba(245,241,235,0.06) 45%, rgba(28,28,30,0.10) 100%); mix-blend-mode: multiply; transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1); z-index: 1; }
+.map-premium:hover::after { opacity: 0; }
+.map-premium::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(223,201,168,0.7); pointer-events: none; z-index: 2; transition: inset 0.6s cubic-bezier(0.22,1,0.36,1), border-color 0.6s; }
+.map-premium:hover::before { inset: 10px; border-color: rgba(196,152,90,0.9); }
+@media (max-width: 700px) { .map-flagship { display: none !important; } }
+.contact-item:hover .contact-icon { background: #C4985A; border-color: #C4985A; color: #fff; }
+.contact-icon { transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
+
+/* ---- focus rings ---- */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #C4985A; outline-offset: 3px; border-radius: 2px; }
+
+/* ---- form fields ---- */
+.field:focus { border-bottom: 1px solid #C4985A !important; }
+.news-input:focus { border-bottom: 1px solid #C4985A !important; box-shadow: 0 1px 0 0 #C4985A; }
+
+/* ---- navbar states ----
+   Transparent over dark heroes (home / craft / brands / brand detail at top),
+   solid everywhere else and once scrolled. */
+#nav { --nav-text: #fff; --nav-tagline: rgba(255,255,255,0.8); background: transparent; }
+#nav.solid, #nav.scrolled { --nav-text: #1C1C1E; --nav-tagline: #9B9590; }
+#nav.solid { background: #F5F1EB; }
+#nav.scrolled { background: rgba(245,241,235,0.92); backdrop-filter: blur(16px) saturate(1.2); box-shadow: 0 1px 0 #E8E3DA, 0 4px 20px rgba(0,0,0,0.03); }
+#nav .nav-text { color: var(--nav-text); }
+#nav .nav-tagline { color: var(--nav-tagline); }
+#nav .nav-icon { color: var(--nav-text); }
+#nav .nav-icon:hover { background: rgba(255,255,255,0.15); transform: scale(1.05); }
+#nav.solid .nav-icon:hover, #nav.scrolled .nav-icon:hover { background: rgba(28,28,30,0.08); }
+#nav .nav-ham { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); }
+#nav.solid .nav-ham, #nav.scrolled .nav-ham { background: #1C1C1E; border: none; }
+#nav .nav-ham:hover { transform: scale(1.08); }
+#nav .nav-logo-img { filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0,0,0,0.25)); }
+#nav.solid .nav-logo-img, #nav.scrolled .nav-logo-img { filter: none; }
+#nav .nav-logo:hover .nav-logo-img { transform: rotate(8deg); }
+
+/* ---- responsive (attribute selectors match the verbatim inline styles) ---- */
+@media (max-width: 860px) {
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1.1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.2fr"],
+  [style*="grid-template-columns: 1.05fr 1fr"],
+  [style*="grid-template-columns: 1.15fr 1fr"],
+  [style*="grid-template-columns: 1.2fr 1fr"],
+  [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: repeat(6, 1fr)"] { grid-template-columns: repeat(3, 1fr) !important; }
+  [style*="padding: 0 52px"] { padding-left: 22px !important; padding-right: 22px !important; }
+  [style*="padding: 190px 52px 90px"] { padding-left: 22px !important; padding-right: 22px !important; }
+  [style*="left: 52px"] { left: 22px !important; }
+  [style*="right: 52px"] { right: 22px !important; }
+  [style*="gap: 110px"] { gap: 34px !important; }
+  [style*="gap: 90px"] { gap: 40px !important; }
+  [style*="gap: 80px"] { gap: 36px !important; flex-wrap: wrap !important; }
+  [style*="gap: 64px"] { gap: 36px !important; }
+  [style*="padding: 130px 0"] { padding-top: 76px !important; padding-bottom: 76px !important; }
+  [style*="padding: 110px 0"] { padding-top: 72px !important; padding-bottom: 72px !important; }
+  [style*="padding: 130px 0 0"] { padding-top: 76px !important; }
+  [style*="min(960px, 96vw)"] { flex-direction: column !important; max-height: 92vh !important; overflow-y: auto !important; }
+  [style*="min(790px, 94vw)"] { width: min(440px, 94vw) !important; }
+  .about-media { height: 320px !important; }
+  .hero-bar { width: 26px !important; }
+}
+@media (max-width: 520px) {
+  [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: repeat(6, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+}

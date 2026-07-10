@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lux Living — Where Luxury Meets Comfort</title>
+<meta name="description" content="LuxLiving, Panipat — authorised Indian home of aprilstory, Ares Italia and Home Feeling. Luxury furniture in 100% genuine leather and premium fabric.">
+<link rel="icon" href="images/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div style="font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; line-height: 1.7; color: #1C1C1E; background: #F5F1EB; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;">
+
+  <!-- ===== PRELOADER ===== -->
+  <div id="preloader" style="position: fixed; inset: 0; z-index: 9999; background: #F5F1EB; display: flex; align-items: center; justify-content: center; flex-direction: column; clip-path: inset(0 0 0% 0); transition: clip-path 0.8s cubic-bezier(0.76,0,0.24,1);">
+    <div style="position: absolute; top: 40px; left: 40px; width: 28px; height: 28px; border-color: #C4985A; border-style: solid; border-width: 1px 0 0 1px; opacity: 0.3;"></div>
+    <div style="position: absolute; top: 40px; right: 40px; width: 28px; height: 28px; border-color: #C4985A; border-style: solid; border-width: 1px 1px 0 0; opacity: 0.3;"></div>
+    <div style="position: absolute; bottom: 40px; left: 40px; width: 28px; height: 28px; border-color: #C4985A; border-style: solid; border-width: 0 0 1px 1px; opacity: 0.3;"></div>
+    <div style="position: absolute; bottom: 40px; right: 40px; width: 28px; height: 28px; border-color: #C4985A; border-style: solid; border-width: 0 1px 1px 0; opacity: 0.3;"></div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div id="pre-logo" style="position: relative; margin-bottom: 28px; opacity: 0; transform: scale(0.7); transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.2s cubic-bezier(0.22,1,0.36,1);">
+        <img src="images/image-Photoroom (8).png" alt="Lux Living" style="width: 110px; height: 110px; object-fit: contain; position: relative; z-index: 2;" />
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(196,152,90,0.12) 0%, transparent 70%); animation: glowPulse 2.5s ease-in-out infinite; z-index: 1;"></div>
+      </div>
+      <div id="pre-letters" style="display: flex; align-items: center; margin-bottom: 32px; padding-left: 10px;"></div>
+      <div style="width: 200px; height: 1px; background: #E8E3DA; overflow: hidden; position: relative;">
+        <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #C4985A, #DFC9A8); transform-origin: left center; animation: barFill3s 3s cubic-bezier(0.22,1,0.36,1) 0.5s both;"></div>
+      </div>
+      <p id="pre-tag" style="font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 2px; color: #9B9590; margin: 28px 0 0; font-style: italic; opacity: 0; transform: translateY(10px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);">Here we go, Let's get comfortable</p>
+    </div>
+    <span id="pre-year" style="position: absolute; bottom: 44px; font-size: 9px; font-weight: 500; letter-spacing: 4px; color: #9B9590; opacity: 0; transition: opacity 1s ease 0.3s;">EST. 2024</span>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; transition: background 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s;">
+    <button id="nav-menu-btn" class="nav-ham" aria-label="Open menu" style="width: 48px; height: 48px; border-radius: 50%; backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.3s; flex-shrink: 0;">
+      <span style="display: block; width: 18px; height: 1.5px; background: #fff; border-radius: 2px;"></span>
+      <span style="display: block; width: 18px; height: 1.5px; background: #fff; border-radius: 2px;"></span>
+      <span style="display: block; width: 18px; height: 1.5px; background: #fff; border-radius: 2px;"></span>
+    </button>
+    <a href="#/" class="nav-logo" style="position: absolute; left: 50%; transform: translateX(-50%); text-decoration: none; display: flex; align-items: center; gap: 12px;">
+      <img src="images/image-Photoroom (8).png" alt="Lux Living" class="nav-logo-img" style="width: 46px; height: 46px; flex-shrink: 0; object-fit: contain; transition: filter 0.5s, transform 0.5s cubic-bezier(0.22,1,0.36,1);" />
+      <span style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="nav-text" style="font-size: 15px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; line-height: 1.2;">LUX LIVING</span>
+        <span class="nav-tagline" style="font-family: 'Cormorant Garamond', serif; font-size: 9px; letter-spacing: 1px; font-style: italic; margin-top: 1px;">Where Luxury Meets Comfort</span>
+      </span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <a href="https://maps.app.goo.gl/NP5b9cA1UCatDeWW8" target="_blank" rel="noopener noreferrer" aria-label="Store Locator" class="nav-icon" style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </a>
+      <a href="tel:+919034116534" aria-label="Call Us" class="nav-icon" style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== SIDE MENU (rendered by app.js) ===== -->
+  <div id="menu-root"></div>
+
+  <!-- ===== PAGE VIEWS (rendered by app.js) ===== -->
+  <main id="app"></main>
+
+  <!-- ===== MODALS (zoom lightbox / instagram, rendered by app.js) ===== -->
+  <div id="modal-root"></div>
+
+  <!-- ===== FOOTER (rendered by app.js) ===== -->
+  <div id="footer-root"></div>
+
+  <!-- ===== WHATSAPP FLOAT ===== -->
+  <a id="wa-float" href="https://wa.me/919034116534?text=Hello%20LuxLiving!%20I'm%20interested%20in%20your%20furniture%20collection." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" data-hover="transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.45);" style="position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 997; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transform: scale(0); opacity: 0; transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);">
+    <svg viewBox="0 0 32 32" fill="currentColor" width="28" height="28"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958A15.916 15.916 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.316 22.612c-.39 1.1-1.932 2.014-3.17 2.28-.846.182-1.95.326-5.67-1.218-4.762-1.976-7.824-6.804-8.062-7.118-.228-.314-1.916-2.55-1.916-4.862s1.214-3.448 1.644-3.92c.39-.428.916-.628 1.222-.628.15 0 .284.008.404.014.43.018.646.042.93.718.356.846 1.222 2.982 1.328 3.2.108.22.214.516.068.828-.138.32-.258.46-.478.71-.22.25-.428.44-.648.71-.198.24-.422.494-.178.924.244.424 1.082 1.784 2.324 2.89 1.596 1.422 2.868 1.882 3.354 2.076.358.144.784.108 1.04-.166.322-.348.72-.924 1.124-1.494.288-.408.65-.46 1.04-.314.396.14 2.508 1.182 2.938 1.398.43.216.716.326.822.504.104.178.104 1.028-.286 2.128z"></path></svg>
+  </a>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button id="btt" aria-label="Back to top" data-hover="background: #1C1C1E; color: #fff; border-color: #1C1C1E;" style="position: fixed; bottom: 28px; left: 28px; width: 44px; height: 44px; background: #F5F1EB; border: 1px solid #D8D2C8; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1C1C1E; z-index: 997; cursor: pointer; transform: translateY(20px); opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.22,1,0.36,1);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg>
+  </button>
+
+  <!-- film grain -->
+  <div style="position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.025; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 256 256&quot;&gt;&lt;filter id=&quot;n&quot;&gt;&lt;feTurbulence type=&quot;fractalNoise&quot; baseFrequency=&quot;0.9&quot; numOctaves=&quot;4&quot; stitchTiles=&quot;stitch&quot;/&gt;&lt;/filter&gt;&lt;rect width=&quot;100%&quot; height=&quot;100%&quot; filter=&quot;url(%23n)&quot;/&gt;&lt;/svg&gt;');"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
