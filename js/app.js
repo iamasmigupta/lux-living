@@ -38,7 +38,11 @@
   function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
   // ---------- hover styles (data-hover="css") ----------
+  // Touch screens fire mouseenter on tap but never mouseleave, leaving hover styles
+  // stuck — so hover styling is only wired up for real pointers.
+  var CAN_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   function bindHover(root) {
+    if (!CAN_HOVER) return;
     qsa('[data-hover]', root).forEach(function (el) {
       if (el.__hoverBound) return;
       el.__hoverBound = true;
@@ -71,6 +75,17 @@
   function catHref(key) { return '#/category/' + key; }
   function tabHref(key, tab) { return '#/category/' + key + '/' + encodeURIComponent(tab); }
   function prodHref(id) { return '#/product/' + id; }
+
+  // WhatsApp enquiry text for a product. wa.me can only prefill text (no file
+  // attachments), so the product photo is included as a direct URL — WhatsApp
+  // renders it as a tappable image preview once the site is on a public domain.
+  function waProductMessage(p) {
+    var dir = location.origin + location.pathname.replace(/[^/]*$/, '');
+    var msg = 'Hi LuxLiving! I want to know more about this piece — ' + p.name +
+      '\n\nProduct page: ' + dir.replace(/\/$/, '') + '/#' + prodHref(p.id).slice(1) +
+      '\nPhoto: ' + dir + p.imgs[0];
+    return encodeURIComponent(msg);
+  }
 
   // ---------- shared fragments ----------
   function luxCard(p, fit, titleSize) {
@@ -708,7 +723,7 @@
         '<button id="pdp-play" aria-label="Play or pause slideshow" data-hover="background: #C4985A;" style="position: absolute; right: 18px; bottom: 14px; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(28,28,30,0.55); backdrop-filter: blur(6px); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 3;"></button>';
     }
     h += '</div>' +
-      '<div style="display: flex; gap: 12px;">';
+      '<div class="pdp-thumbs" style="display: flex; gap: 12px;">';
     p.imgs.forEach(function (img, i) {
       h += '<button class="pdp-thumb" data-i="' + i + '" style="width: 110px; height: 82px; padding: 0; border: 2px solid transparent; background: #F0EAE0; cursor: pointer; overflow: hidden; transition: border-color 0.3s;"><img src="' + img + '" alt="View" style="width: 100%; height: 100%; object-fit: cover; display: block;" /></button>';
     });
@@ -724,7 +739,7 @@
         '</div>' +
         '<div style="border-top: 1px solid #E8E3DA; padding-top: 28px;">' +
           '<p style="font-family: \'Cormorant Garamond\', serif; font-style: italic; font-size: 16px; color: #6B6560; margin: 0 0 18px;">For pricing and availability, message us directly — we reply within minutes.</p>' +
-          '<a href="https://wa.me/' + WA + '?text=' + encodeURIComponent('Hi LuxLiving! I want to know more about this piece — ' + p.name) + '" target="_blank" rel="noopener noreferrer" data-hover="transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.35);" style="display: inline-flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 10px; padding: 17px 44px; background: #25D366; color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 32px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;">' + WA_SVG + '<span>Enquire on WhatsApp</span></a>' +
+          '<a href="https://wa.me/' + WA + '?text=' + waProductMessage(p) + '" target="_blank" rel="noopener noreferrer" data-hover="transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.35);" style="display: inline-flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 10px; padding: 17px 44px; background: #25D366; color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 32px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;">' + WA_SVG + '<span>Enquire on WhatsApp</span></a>' +
           '<a href="tel:+919034116534" data-hover="background: #1C1C1E; border-color: #1C1C1E; color: #F5F1EB;" style="display: inline-flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 8px; padding: 15px 44px; margin-top: 12px; background: transparent; color: #1C1C1E; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; border: 1px solid #D8D2C8; border-radius: 32px; text-decoration: none; transition: all 0.35s;"><span>Call the Showroom</span></a>' +
         '</div>' +
       '</div>' +
@@ -905,9 +920,11 @@
         '</div>' +
         '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">' +
         b.locations.map(function (bl) {
-          return '<div data-reveal data-tilt="1" style="background: #fff; padding: 34px 30px; box-shadow: 0 4px 30px rgba(0,0,0,0.04); text-align: center;">' +
+          var parts = bl.split(' · ');
+          var tag = parts[1] ? '<div style="font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #C4985A; margin-top: 8px;">' + parts[1] + '</div>' : '';
+          return '<div data-reveal data-tilt="1" style="background: #fff; padding: 34px 30px; box-shadow: 0 4px 30px rgba(0,0,0,0.04); text-align: center;' + (parts[1] ? ' border: 1px solid #DFC9A8;' : '') + '">' +
             '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4985A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' +
-            '<div style="font-family: \'Playfair Display\', serif; font-size: 21px; font-weight: 400;">' + bl + '</div></div>';
+            '<div style="font-family: \'Playfair Display\', serif; font-size: 21px; font-weight: 400;">' + parts[0] + '</div>' + tag + '</div>';
         }).join('') +
         '</div>' +
       '</div></section>' +
@@ -1155,6 +1172,7 @@
   var menuGroups = [
     { title: 'Living', links: [['All Living', catHref('living')], ['Sofa Sets', tabHref('living', 'Sofa Sets')], ['Triple Sitter', tabHref('living', 'Triple Sitter')], ['Two Sitter', tabHref('living', 'Two Sitter')], ['Recliner Sofas', tabHref('living', 'Recliner Sofas')]] },
     { title: 'Armchairs', links: [['All Armchairs', catHref('armchairs')], ['Swivel Chairs', tabHref('armchairs', 'Swivel Chairs')], ['Recliners', tabHref('armchairs', 'Recliners')]] },
+    { title: 'Pair of Chairs', links: [['Matched Lounge Pairs', catHref('pairs')]] },
     { title: 'Bedroom', links: [['Beds & Benches', catHref('bedroom')]] },
     { title: 'Tables', links: [['Coffee & Side Tables', catHref('tables')]] },
     { title: 'Dining', links: [['Dining Tables & Sets', catHref('dining')]] },

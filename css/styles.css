@@ -20,15 +20,21 @@ body { margin: 0; background: #F5F1EB; }
 @keyframes menuIn { from { transform: translateX(-48px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ---- product / brand cards ---- */
-.lux-card:hover .lux-card-img1 { opacity: 0; transform: scale(1.06); }
-.lux-card:hover .lux-card-img2 { opacity: 1; transform: scale(1); }
+/* ---- product / brand cards ----
+   Blank-proof hover: the primary photo NEVER fades out. On hover the alternate
+   photo fades in on top of it (with its own solid backdrop, so it fully covers
+   the primary once visible). If the alternate is missing or still downloading,
+   it is kept hidden — so the product photo is visible in every possible state,
+   on every device, stuck-hover or not. */
+.lux-card-img2 { background: #F0EAE0; }
+@media (hover: hover) and (pointer: fine) {
+  .lux-card:hover .lux-card-img1 { transform: scale(1.06); }
+  .lux-card:hover .lux-card-img2 { opacity: 1; transform: scale(1); }
+  .lux-card.img2-loading:hover .lux-card-img2 { opacity: 0 !important; }
+}
 .lux-card:hover .lux-card-arrow { opacity: 1; transform: translateY(0); }
 .lux-card:hover .lux-card-title { color: #C4985A; }
 .lux-card:has(.lux-card-img2[src=""]) .lux-card-img2 { display: none; }
-/* never blank the card: if the hover image is missing or still loading, keep the primary image visible */
-.lux-card.img2-loading:hover .lux-card-img1,
-.lux-card:has(.lux-card-img2[src=""]):hover .lux-card-img1 { opacity: 1; }
 .brand-card { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
 .brand-card:hover { transform: translateY(-6px); }
 .brand-card img { transition: transform 1s cubic-bezier(0.22,1,0.36,1); }
@@ -102,6 +108,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   [style*="min(790px, 94vw)"] { width: min(440px, 94vw) !important; }
   .about-media { height: 320px !important; }
   .hero-bar { width: 26px !important; }
+  /* product detail: stack gallery over info (7fr 5fr never matched the generic rules) */
+  [style*="grid-template-columns: 7fr 5fr"] { grid-template-columns: 1fr !important; }
+  [style*="gap: 72px"] { gap: 34px !important; }
+  [style*="padding: 48px 52px 130px"] { padding: 28px 22px 84px !important; }
+  [style*="padding: 80px 52px 130px"] { padding: 48px 22px 84px !important; }
+  /* stats strip, consultation card, brand cards, footer */
+  [style*="padding: 6px 62px"] { padding: 6px 26px !important; }
+  [style*="padding: 52px;"] { padding: 34px 22px !important; }
+  [style*="padding: 60px 56px"] { padding: 36px 24px !important; }
+  [style*="padding: 80px 48px 40px"] { padding: 56px 22px 32px !important; }
+}
+.pdp-thumbs { flex-wrap: wrap; }
+@media (max-width: 640px) {
+  #nav { padding: 0 14px !important; }
+  #nav .nav-icon { width: 34px !important; }
+  .pdp-thumbs button { width: 84px !important; height: 64px !important; }
+}
+@media (max-width: 480px) {
+  .nav-tagline { display: none; }
+  #nav .nav-text { font-size: 13px !important; letter-spacing: 3px !important; }
 }
 @media (max-width: 520px) {
   [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr !important; }
